@@ -1,0 +1,9 @@
+	x
+Elastic Net (No Dep)	0.67±0.02
+Elastic Net	0.83±0.01
+L0L2 (No Dep)	0.68±0.02
+L0L2	0.83±0.01
+Random Forest (No Dep)	0.76±0.02
+Random Forest	0.86±0.01
+MUVR (No Dep)	0.7±0.05
+MUVR	0.86±0.02

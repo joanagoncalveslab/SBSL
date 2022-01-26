@@ -1,0 +1,7 @@
+	discoversl	isle
+Elastic Net	0.77±0.04	1±0
+L0L2	0.78±0.04	1±0
+Random Forest	0.73±0.05	0.97±0.04
+MUVR	0.68±0.05	0.99±0.02
+DAISY	0.35±0.02	0.52±0.08
+pca-gCMF	0.6±0.07	0.99±0.01

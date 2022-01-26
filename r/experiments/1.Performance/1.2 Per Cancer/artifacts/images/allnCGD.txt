@@ -1,0 +1,19 @@
+% latex table generated in R 3.5.0 by xtable 1.8-4 package
+% Tue Jul  7 10:34:54 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllll}
+  \hline
+ & BRCA & COAD & LUAD & OV \\ 
+  \hline
+Elastic Net (All) & $.95\pm.02$ & $.52\pm.04$ & $.94\pm.01$ & $.48\pm.07$ \\ 
+  Elastic Net (Unbalanced) & $.84\pm.02$ & $.56\pm.05$ & $.94\pm.02$ & $.45\pm.08$ \\ 
+  L0L2 (All) & $.94\pm.02$ & $.53\pm.04$ & $.94\pm.02$ & $.5\pm.08$ \\ 
+  L0L2 (Unbalanced) & $.83\pm.02$ & $.57\pm.04$ & $.93\pm.02$ & $.46\pm.08$ \\ 
+  MUVR (All) & $.98\pm.01$ & $.69\pm.04$ & $.92\pm.02$ & $.51\pm.14$ \\ 
+  MUVR (Unbalanced) & $.98\pm.01$ & $.67\pm.06$ & $.95\pm.03$ & $.55\pm.12$ \\ 
+  Random Forest (All) & $.98\pm.02$ & $.68\pm.06$ & $.93\pm.03$ & $.48\pm.15$ \\ 
+  Random Forest (Unbalanced) & $.98\pm.01$ & $.65\pm.03$ & $.9\pm.05$ & $.56\pm.12$ \\ 
+   \hline
+\end{tabular}
+\end{table}

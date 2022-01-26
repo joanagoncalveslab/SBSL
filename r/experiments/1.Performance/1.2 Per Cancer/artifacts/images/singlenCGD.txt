@@ -1,0 +1,18 @@
+% latex table generated in R 3.5.0 by xtable 1.8-4 package
+% Fri Jul  3 22:03:10 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{rllll}
+  \hline
+ & BRCA & COAD & LUAD & OV \\ 
+  \hline
+DAISY & $.6\pm.04$ & $.77\pm.04$ & $.42\pm.07$ & $.52\pm.1$ \\ 
+  DiscoverSL & $.6\pm.05$ & $.54\pm.03$ & $.58\pm.07$ & $.5\pm.12$ \\ 
+  Elastic Net & $.99\pm.01$ & $.67\pm.04$ & $.97\pm.01$ & $.62\pm.11$ \\ 
+  L0L2 & $.99\pm0$ & $.66\pm.05$ & $.97\pm.01$ & $.61\pm.12$ \\ 
+  MUVR & $.99\pm0$ & $.68\pm.03$ & $.95\pm.02$ & $.44\pm.11$ \\ 
+  pca-gCMF & $.97\pm.02$ & $.66\pm.04$ & $.79\pm.11$ & $.93\pm.06$ \\ 
+  Random Forest & $.99\pm.01$ & $.72\pm.04$ & $.95\pm.02$ & $.51\pm.12$ \\ 
+   \hline
+\end{tabular}
+\end{table}

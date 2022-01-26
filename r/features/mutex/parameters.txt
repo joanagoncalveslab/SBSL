@@ -1,0 +1,4 @@
+data-file=dataset.txt
+max-group-size=2
+search-on-signaling-network=false
+genes-file=genes.txt
