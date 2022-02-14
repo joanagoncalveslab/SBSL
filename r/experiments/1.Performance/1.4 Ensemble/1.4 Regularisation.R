@@ -1,7 +1,7 @@
 # Different Ideas for dealing with the class imbalance
 # https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html
 
-project_dir <- "~/repos/msc-thesis-project/"
+project_dir <- "~/repos/SBSL-modelling-and-analysis/"
 working_dir <- paste0(project_dir, "r/experiments/1.Performance/1.4 Ensemble/artifacts/")
 setwd(working_dir)
 source(paste0(project_dir, "r/utils/train-model.R"))

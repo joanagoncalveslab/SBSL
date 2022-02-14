@@ -1,4 +1,4 @@
-project_dir <- "~/repos/msc-thesis-project/"
+project_dir <- "~/repos/SBSL-modelling-and-analysis/"
 working_dir <- paste0(project_dir, "r/experiments/1.Performance/1.3 Dataset Cross Comparison/artifacts/images")
 setwd(working_dir)
 source(paste0(project_dir, "r/utils/logging.R"))

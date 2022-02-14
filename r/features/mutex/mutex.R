@@ -4,8 +4,8 @@ library(readr)
 library(dplyr)
 library(discover)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 
@@ -14,9 +14,9 @@ for (C in cancer_types){
   ## Mutation Matrix Creation
   ##########################################################
   
-  cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
+  cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
-  maf <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
+  maf <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   
   
@@ -55,7 +55,7 @@ for (C in cancer_types){
   ##########################################################
   
   data.mut <- cbind(Symbol = rownames(data.mut), data.mut)
-  dir <- "~/repos/msc-thesis-project/tmp"
+  dir <- "~/repos/SBSL-modelling-and-analysis/tmp"
   data_file <- paste0(dir, "/dataset.txt")
   write.table(data.mut, data_file, sep = "\t", col.names=colnames(data.mut), row.names=F, quote = FALSE)
   
@@ -67,7 +67,7 @@ for (C in cancer_types){
   genes_file <- paste0(dir, "/genes.txt")
   write.table(genes, genes_file, sep = "\t", row.names=F, col.names = F, quote = FALSE)
   
-  system(paste("cp ~/repos/msc-thesis-project/r/features/mutex/parameters.txt", dir))
+  system(paste("cp ~/repos/SBSL-modelling-and-analysis/r/features/mutex/parameters.txt", dir))
   
   
   jar_file <- "~/repos/mutex/target/mutex.jar"
@@ -76,7 +76,7 @@ for (C in cancer_types){
   ##########################################################
   ## Load results
   ##########################################################
-  ranked_groups <- read_delim("~/repos/msc-thesis-project/tmp/ranked-groups.txt", 
+  ranked_groups <- read_delim("~/repos/SBSL-modelling-and-analysis/tmp/ranked-groups.txt", 
                               "\t", escape_double = FALSE, col_names = c("score", "gene1", "gene2"), 
                               trim_ws = TRUE, skip = 1)
   

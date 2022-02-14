@@ -2,8 +2,8 @@ library(readr)
 library(dplyr)
 library(discover)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 
@@ -17,9 +17,9 @@ for (C in cancer_types){
   ## Mutation Matrix Creation
   ##########################################################
   
-  cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
+  cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
-  maf <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
+  maf <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   
   

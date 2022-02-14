@@ -5,34 +5,34 @@ library(readxl)
 ## Generate all the data
 ###########################################
 
-# source("~/repos/msc-thesis-project/r/features/mutex/discover.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/mutex/discover.R")
 # rm(list = ls())
 
-# source("~/repos/msc-thesis-project/r/features/mutex/discoverSL.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/mutex/discoverSL.R")
 # rm(list = ls())
 
-# source("~/repos/msc-thesis-project/r/features/mutex/mutex.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/mutex/mutex.R")
 # rm(list = ls())
 
-# source("~/repos/msc-thesis-project/r/features/mutex/alteration.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/mutex/alteration.R")
 # rm(list = ls())
 
-# source("~/repos/msc-thesis-project/r/features/pathway_analysis.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/pathway_analysis.R")
 # rm(list = ls())
 # 
-# source("~/repos/msc-thesis-project/r/features/generate_deg_features.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/generate_deg_features.R")
 # rm(list = ls())
 # 
-# source("~/repos/msc-thesis-project/r/features/expcorr_analysis.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/expcorr_analysis.R")
 # rm(list = ls())
 # 
-# source("~/repos/msc-thesis-project/r/features/survival_analysis.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/survival_analysis.R")
 # rm(list = ls())
 # 
-# source("~/repos/msc-thesis-project/r/features/dependency_scores_analysis.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/dependency_scores_analysis.R")
 # rm(list = ls())
 # 
-# source("~/repos/msc-thesis-project/r/features/GTEx_analysis.R")
+# source("~/repos/SBSL-modelling-and-analysis/r/features/GTEx_analysis.R")
 # rm(list = ls())
 
 
@@ -40,10 +40,10 @@ library(readxl)
 ## Combine the data
 ###########################################
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
 
 generate_features_for_dataset <- function(dataset) {
-  output_dir <- paste0("~/repos/msc-thesis-project/processed_data/", dataset, "/")
+  output_dir <- paste0("~/repos/SBSL-modelling-and-analysis/processed_data/", dataset, "/")
   all_labels <- labels.load(dataset)
   cancer_types <- unique(all_labels$cancer_type)
   # Need to limit cancer types to those which we have generated data for
@@ -157,7 +157,7 @@ generate_features_for_dataset <- function(dataset) {
     results[[C]] <- labels
     print(paste("finished ", C, " features"))
   }
-  saveRDS(dplyr::bind_rows(results), file = paste0("~/repos/msc-thesis-project/r/data/", dataset, "_data.Rdata"))
+  saveRDS(dplyr::bind_rows(results), file = paste0("~/repos/SBSL-modelling-and-analysis/r/data/", dataset, "_data.Rdata"))
 }
 
 generate_features_for_dataset("isle")

@@ -1,5 +1,5 @@
-source("~/repos/msc-thesis-project/r/utils/train-model.R")
-setwd("~//repos/msc-thesis-project/r/data")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/train-model.R")
+setwd("~//repos/SBSL-modelling-and-analysis/r/data")
 
 remove_duplicates_within <- function(data) {
   dups <- list()

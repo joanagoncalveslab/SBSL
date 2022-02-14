@@ -29,7 +29,7 @@ train.get_formula <- function(train, remove_dep_scores = FALSE) {
 
 "This function takes a list and returns the combined cancer datasets"
 train.get_dataset <- function(dataset=NULL, cancers=NULL) {
-  all_data <- readRDS(paste0("~/repos/msc-thesis-project/r/data/", dataset, ".RData"))
+  all_data <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/", dataset, ".RData"))
   all_data <- na.omit(all_data)
   if (is.null(cancers)) {
     return(all_data)

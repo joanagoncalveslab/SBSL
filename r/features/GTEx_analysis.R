@@ -1,8 +1,8 @@
 library(readr)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/load-raw.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-raw.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 

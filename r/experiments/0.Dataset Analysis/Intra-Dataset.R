@@ -1,6 +1,6 @@
-project_dir <- "~/repos/msc-thesis-project/"
+project_dir <- "~/repos/SBSL-modelling-and-analysis/"
 working_dir <- paste0(project_dir, "r/experiments/0.Dataset Analysis/")
-source("~/repos/msc-thesis-project/r/utils/train-model.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/train-model.R")
 
 # load data and remove duplicates
 cancers <- train.get_cancer_types()

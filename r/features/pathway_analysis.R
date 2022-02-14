@@ -1,26 +1,26 @@
 library(readr)
 library(readxl)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 
 # load kegg
-kegg_pathway <- read_delim("~/repos/msc-thesis-project/raw_data/msigdb/c2.cp.kegg.v7.0.symbols.gmt", 
+kegg_pathway <- read_delim("~/repos/SBSL-modelling-and-analysis/raw_data/msigdb/c2.cp.kegg.v7.0.symbols.gmt", 
                            "\t", escape_double = FALSE, col_names = FALSE, 
                            col_types = cols(X2 = col_skip()), trim_ws = TRUE)
 rownames(kegg_pathway) <- kegg_pathway$X1
 kegg_pathway$X1 <- NULL
 
 # load reactome
-reactome_pathway <- read_delim("~/repos/msc-thesis-project/raw_data/msigdb/c2.cp.reactome.v7.0.symbols.gmt", 
+reactome_pathway <- read_delim("~/repos/SBSL-modelling-and-analysis/raw_data/msigdb/c2.cp.reactome.v7.0.symbols.gmt", 
                                "\t", escape_double = FALSE, col_types = cols(X2 = col_skip()), 
                                trim_ws = TRUE, col_names = FALSE)
 rownames(reactome_pathway) <- reactome_pathway$X1
 reactome_pathway$X1 <- NULL
 
 # load pid
-pid_pathway <- read_delim("~/repos/msc-thesis-project/raw_data/msigdb/c2.cp.pid.v7.0.symbols.gmt", 
+pid_pathway <- read_delim("~/repos/SBSL-modelling-and-analysis/raw_data/msigdb/c2.cp.pid.v7.0.symbols.gmt", 
                           "\t", escape_double = FALSE, col_types = cols(X2 = col_skip()), 
                           trim_ws = TRUE, col_names = FALSE)
 rownames(pid_pathway) <- pid_pathway$X1

@@ -1,5 +1,5 @@
 start_time <- Sys.time()
-project_dir <- "~/repos/msc-thesis-project/"
+project_dir <- "~/repos/SBSL-modelling-and-analysis/"
 working_dir <- paste0(project_dir, "r/experiments/2.Feature Analysis/2.1 Feature Importance/artifacts/")
 models_dir <- paste0(project_dir, "r/experiments/1.Performance/1.2 Per Cancer/artifacts/")
 setwd(working_dir)

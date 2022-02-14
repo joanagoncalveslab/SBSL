@@ -7,13 +7,13 @@ cancer_types <- c("BRCA", "LUAD", "OV", "COAD", "KIRC", "LAML")
 
 for (C in cancer_types) {
   # runDate <- getFirehoseRunningDates(1)
-  # destdir <- "/home/colm/repos/msc-thesis-project/raw_data/firehose"
+  # destdir <- "/home/colm/repos/SBSL-modelling-and-analysis/raw_data/firehose"
   # brcaData <- getFirehoseData(dataset=C, runDate=runDate, clinic=TRUE, destdir = destdir)
   
   ##########################################################
   ## Clinical 
   ##########################################################
-  clinical <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-",C, "-Clinical.txt"), 
+  clinical <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-",C, "-Clinical.txt"), 
                          "\t", escape_double = FALSE, trim_ws = TRUE)
   cols <- unname(unlist(clinical[, 1]))
   clinical[, 1] <- NULL
@@ -24,7 +24,7 @@ for (C in cancer_types) {
   ##########################################################
   ## Copy Number Variant 
   ##########################################################
-  cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
+  cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   cnv_genes <- unlist(cnv[, 1])
   cnv <- cnv[, -c(1, 2, 3)]
@@ -37,7 +37,7 @@ for (C in cancer_types) {
   ##########################################################
   ## Mutation Data 
   ##########################################################
-  maf <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
+  maf <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   maf <- dplyr::filter(maf, Variant_Classification != "Silent")
   maf <- dplyr::select(maf, Hugo_Symbol, Tumor_Sample_Barcode)
@@ -60,7 +60,7 @@ for (C in cancer_types) {
   ##########################################################
   ## mRNA Data 
   ##########################################################
-  rna <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-RNAseq2GeneNorm.txt"), 
+  rna <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-RNAseq2GeneNorm.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   rna <- rna[-(1:30), ]
   rna_samples <- unname(sapply(colnames(rna)[-1], function (x) tolower(substr(x, 1, 12))))
@@ -82,5 +82,5 @@ for (C in cancer_types) {
     alteration = data.frame(alt),
     underoverexpressed = data.frame(underoverexpressed)
   )
-  saveRDS(data, paste0("~/repos/msc-thesis-project/r/data/datasets/survival_", C, ".RData"))
+  saveRDS(data, paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/survival_", C, ".RData"))
 }

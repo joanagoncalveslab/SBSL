@@ -2,7 +2,7 @@ library(readr)
 library("org.Hs.eg.db")
 
 raw.get_tcga_expression <- function(cancer, genes = NA) {
-  rna <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-RNAseq2GeneNorm.txt"), 
+  rna <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-RNAseq2GeneNorm.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   rna <- rna[2:dim(rna)[1], ]
   colnames(rna)[1] <- "gene_id"
@@ -21,7 +21,7 @@ raw.get_tcga_expression <- function(cancer, genes = NA) {
 }
 
 raw.get_tcga_mutations <- function(cancer, genes = NA) {
-  mutations <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-Mutations-AllSamples.txt"), 
+  mutations <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   mutations <- mutations[mutations$Variant_Classification != "Silent", ]
   if (typeof(genes) == "character") {
@@ -32,10 +32,10 @@ raw.get_tcga_mutations <- function(cancer, genes = NA) {
 
 raw.get_tcga_cna <- function(cancer, genes = NA, thresholded = TRUE) {
   if (thresholded) {
-    cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-all_thresholded.by_genes.txt"), 
+    cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-all_thresholded.by_genes.txt"), 
                       "\t", escape_double = FALSE, trim_ws = TRUE)   
   } else {
-    cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-all_data_by_genes.txt"), 
+    cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-all_data_by_genes.txt"), 
                       "\t", escape_double = FALSE, trim_ws = TRUE)    
   }
   cnv_genes <- unlist(cnv$`Gene Symbol`)
@@ -53,7 +53,7 @@ raw.get_tcga_cna <- function(cancer, genes = NA, thresholded = TRUE) {
 }
 
 raw.get_GTEx_expression <- function (cancer, genes) {
-  sample_attr <- read_delim("~/repos/msc-thesis-project/raw_data/gtex/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt", 
+  sample_attr <- read_delim("~/repos/SBSL-modelling-and-analysis/raw_data/gtex/GTEx_Analysis_v8_Annotations_SampleAttributesDS.txt", 
                             "\t", escape_double = FALSE, col_types = cols_only(SAMPID = col_guess(), 
                                                                                SMTS = col_guess(),
                                                                                SMTSD = col_guess()), trim_ws = TRUE)
@@ -76,7 +76,7 @@ raw.get_GTEx_expression <- function (cancer, genes) {
   print("got ensembl ids")
   
   # first fine the correct lines to read
-  f <- "~/repos/msc-thesis-project/raw_data/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct"
+  f <- "~/repos/SBSL-modelling-and-analysis/raw_data/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_tpm.gct"
   conn <- file(f, "r")
   lines <- list()
   names <- read.table(conn, sep = "\t", skip = 2, nrow = 1)
@@ -102,7 +102,7 @@ raw.get_GTEx_expression <- function (cancer, genes) {
 }
 
 raw.get_ccle_rnai_dependency_scores <- function(cancer, genes = NULL) {
-  sample_info <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/sample_info.csv")
+  sample_info <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/sample_info.csv")
   cancer2tissue <- c(BRCA = "breast"
                      , LUAD = "lung"
                      , KIRC = "kidney"
@@ -110,7 +110,7 @@ raw.get_ccle_rnai_dependency_scores <- function(cancer, genes = NULL) {
                      , COAD = "colorectal")
   c_samples <- sample_info[sample_info$disease == cancer2tissue[cancer], ]
   
-  D2 <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/D2_combined_gene_dep_scores.csv")
+  D2 <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/D2_combined_gene_dep_scores.csv")
   D2_genes <- sapply(strsplit(D2$X1, " "), function (x) x[[1]])
   D2 <- D2[!duplicated(D2_genes), ]
   D2$X1 <- NULL
@@ -124,7 +124,7 @@ raw.get_ccle_rnai_dependency_scores <- function(cancer, genes = NULL) {
 }
 
 raw.get_ccle_rnai_cna <- function(cancer, genes) {
-  sample_info <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/sample_info.csv")
+  sample_info <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/sample_info.csv")
   cancer2tissue <- c(BRCA = "breast"
                      , LUAD = "lung"
                      , KIRC = "kidney"
@@ -132,7 +132,7 @@ raw.get_ccle_rnai_cna <- function(cancer, genes) {
                      , COAD = "colorectal")
   c_samples <- sample_info[sample_info$disease == cancer2tissue[cancer], ]
   
-  cn <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/WES_SNP_CN_data.csv")
+  cn <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/WES_SNP_CN_data.csv")
   cn_genes <- sapply(strsplit(cn$X1, " "), function (x) x[[1]])
   cn <- cn[!duplicated(cn_genes), ]
   rownames(cn) <- cn_genes[!duplicated(cn_genes)]
@@ -144,14 +144,14 @@ raw.get_ccle_rnai_cna <- function(cancer, genes) {
 }
 
 raw.get_ccle_rnai_mutations <- function(cancer, genes) {
-  sample_info <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/sample_info.csv")
+  sample_info <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/sample_info.csv")
   cancer2tissue <- c(BRCA = "breast"
                      , LUAD = "lung"
                      , KIRC = "kidney"
                      , OV = "ovary"
                      , COAD = "colorectal")
   c_samples <- sample_info[sample_info$disease == cancer2tissue[cancer], ]
-  mutations <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/CCLE_mutation_data.csv")
+  mutations <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/CCLE_mutation_data.csv")
   mutations <- mutations[mutations$Variant_Classification != "Silent", ]
   mutations <- mutations[mutations$Hugo_Symbol %in% genes, ]
   mutations <- mutations[mutations$Tumor_Sample_Barcode %in% c_samples$CCLE_ID, ]
@@ -159,7 +159,7 @@ raw.get_ccle_rnai_mutations <- function(cancer, genes) {
 }
 
 raw.get_ccle_rnai_expression <- function(cancer) {
-  sample_info <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/sample_info.csv")
+  sample_info <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/sample_info.csv")
   cancer2tissue <- c(BRCA = "breast"
                      , LUAD = "lung"
                      , KIRC = "kidney"
@@ -167,7 +167,7 @@ raw.get_ccle_rnai_expression <- function(cancer) {
                      , COAD = "large_intestine")
   c_samples <- sample_info[sample_info$disease == cancer2tissue[cancer], ]
   
-  ex <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/RNAseq_lRPKM_data.csv")
+  ex <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/RNAseq_lRPKM_data.csv")
   ex_genes <- sapply(strsplit(ex$X1, " "), function (x) x[[1]])
   ex <- ex[!duplicated(ex_genes), ]
   rownames(ex) <- ex_genes[!duplicated(ex_genes)]

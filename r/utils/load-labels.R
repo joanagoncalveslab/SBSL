@@ -4,13 +4,13 @@ library(dplyr)
 
 labels.load <- function(dataset, all_data = FALSE) {
   if (dataset == "isle") {
-    labels <- read_excel("~/repos/msc-thesis-project/raw_data/labels/ISLE.xlsx", skip = 2)
+    labels <- read_excel("~/repos/SBSL-modelling-and-analysis/raw_data/labels/ISLE.xlsx", skip = 2)
     labels <- dplyr::rename(labels, cancer_type = `cancer type tested`)
     labels <- labels[!(labels$`gene1 perturbation` == "mut" | labels$`gene2 perturbation` == "mut"), ]
   } 
   
   if (dataset == "discoversl") {
-    labels <- read_delim("~/repos/msc-thesis-project/raw_data/labels/DiscoverSL_trainingSet.txt", 
+    labels <- read_delim("~/repos/SBSL-modelling-and-analysis/raw_data/labels/DiscoverSL_trainingSet.txt", 
                               "\t", escape_double = FALSE, trim_ws = TRUE)
     labels <- dplyr::rename(labels, cancer_type = Cancer, gene1 = Gene1, gene2 = Gene2, SL = Class)
     labels$SL <- sapply(labels$SL, function(x) ifelse(x == "positive", 1, 0))

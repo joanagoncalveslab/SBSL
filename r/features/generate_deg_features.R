@@ -3,14 +3,14 @@ library(readr)
 library(dplyr)
 library(readxl)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 
 for (C in cancer_types) {
   print(paste("Starting", C ,"analysis"))
-  results_dir <- paste0("~/repos/msc-thesis-project/processed_data/", C, "_results/")
+  results_dir <- paste0("~/repos/SBSL-modelling-and-analysis/processed_data/", C, "_results/")
   diffexp_files <- list.files(results_dir)
   diffexp_files <- diffexp_files[unlist(lapply(diffexp_files, function (x) as.numeric(strsplit(x, "__")[[1]][2]) > 3))]
   

@@ -9,7 +9,7 @@ library(data.table)
 library(edgeR)
 library(readxl)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
 
 # Generate Differential Expression 
 #
@@ -176,11 +176,11 @@ generate_CRISPR_depenency_scores <- function(gene1, genes, cancer) {
     COAD = "colorectal",
     LAML = "multiple_myeloma"
   )
-  crispr <- readRDS("~/repos/msc-thesis-project/r/data/datasets/avana.RData")
-  sample_info <- readRDS("~/repos/msc-thesis-project/r/data/datasets/sample_info.RData")
+  crispr <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/avana.RData")
+  sample_info <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/sample_info.RData")
   samples <- colnames(crispr)
   samples <- intersect(samples, sample_info$DepMap_ID[grepl(tissues[cancer], sample_info$lineage)])  
-  mutations <- readRDS("~/repos/msc-thesis-project/r/data/datasets/CCLE_mutations.RData")
+  mutations <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/CCLE_mutations.RData")
   mutations <- mutations[mutations$Variant_Classification != "Silent", ]
   mutations <- mutations[mutations$DepMap_ID %in% samples, ]
   
@@ -207,11 +207,11 @@ generate_RNAi_depenency_scores <- function(gene1, genes, cancer) {
     COAD = "colorectal",
     LAML = "multiple_myeloma"
   )
-  RNAi <- readRDS("~/repos/msc-thesis-project/r/data/datasets/RNAi_combined.RData")
-  sample_info <- readRDS("~/repos/msc-thesis-project/r/data/datasets/sample_info.RData")
+  RNAi <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/RNAi_combined.RData")
+  sample_info <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/sample_info.RData")
   samples <- colnames(RNAi)
   samples <- intersect(samples, sample_info$DepMap_ID[grepl(tissues[cancer], sample_info$lineage)])  
-  mutations <- readRDS("~/repos/msc-thesis-project/r/data/datasets/CCLE_mutations.RData")
+  mutations <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/CCLE_mutations.RData")
   mutations <- mutations[mutations$Variant_Classification != "Silent", ]
   mutations <- mutations[mutations$DepMap_ID %in% samples, ]
   
@@ -231,7 +231,7 @@ generate_RNAi_depenency_scores <- function(gene1, genes, cancer) {
 # @example generate_gene_expression_correlations("POLQ", genes, "BRCA")
 generate_gene_expression_correlations <- function(gene1, genes, cancer) {
   print(paste0("generating gene expression correlations for ", gene1, " in ", cancer))
-  mRNA <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/tcga_expression_", cancer, ".RData"))
+  mRNA <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/tcga_expression_", cancer, ".RData"))
   mRNA <- as.data.frame(mRNA)
   normal_samples <- substr(colnames(mRNA), 14, 15) == "11"
   tumour_corr <- numeric(length(genes)) 
@@ -278,7 +278,7 @@ generate_gene_expression_correlations <- function(gene1, genes, cancer) {
 # @example generate_GTEx_scores("POLQ", genes, "BRCA")
 generate_GTEx_scores <- function(gene1, genes, cancer) {
   print(paste0("generating GTEx scores for ", gene1, " in ", cancer))
-  mRNA <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/GTEx_", cancer, ".RData"))
+  mRNA <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/GTEx_", cancer, ".RData"))
   gtex_corr <- numeric(length(genes))
   gtex_corr.pvalue <- numeric(length(genes)) + 1
   names(gtex_corr) <- names(gtex_corr.pvalue) <- genes
@@ -311,7 +311,7 @@ generate_GTEx_scores <- function(gene1, genes, cancer) {
 # @example generate_pathway_scores("POLQ", genes)
 generate_pathway_scores <- function(gene1, genes) {
   print(paste0("generating pathway coparticipation for ", gene1))
-  pathways <- readRDS("~/repos/msc-thesis-project/r/data/datasets/pathway_gene_sets.RData")
+  pathways <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/pathway_gene_sets.RData")
   pathway_coparticipation <- numeric(length(genes)) + 1
   names(pathway_coparticipation) <- genes
   N <- length(pathways)
@@ -344,7 +344,7 @@ generate_pathway_scores <- function(gene1, genes) {
 # @example generate_alteration_mutex_scores("POLQ", genes, "BRCA")
 generate_alteration_mutex_scores <- function(gene1, genes, cancer) {
   print(paste0("generating alteration mutex scores for ", gene1, " in ", cancer))
-  a <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/mutex_alt_", cancer, ".RData"))
+  a <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/mutex_alt_", cancer, ".RData"))
   mutex_alt <- numeric(length(genes)) + 1
   names(mutex_alt) <- genes
   for (gene2 in genes) {
@@ -375,7 +375,7 @@ generate_alteration_mutex_scores <- function(gene1, genes, cancer) {
 # 
 # @example generate_alteration_mutex_scores("POLQ", genes, "BRCA")
 generate_discover_mutex_scores <- function(gene1, genes, cancer) {
-  events <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/discover_event_matrix_", cancer, ".RData")) 
+  events <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/discover_event_matrix_", cancer, ".RData")) 
   discover_mutex <- numeric(length(genes)) + 1
   names(discover_mutex) <- genes
   for (gene2 in genes){
@@ -400,7 +400,7 @@ generate_discover_mutex_scores <- function(gene1, genes, cancer) {
 # @example generate_alteration_mutex_scores("POLQ", genes, "BRCA")
 generate_discoverSL_mutex_scores <- function(gene1, genes, cancer) {
   print(paste0("generating discoverSL mutex scores for ", gene1, " in ", cancer))
-  discoverSL.mutex <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/discoversl_mutex_", cancer, ".RData")) 
+  discoverSL.mutex <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/discoversl_mutex_", cancer, ".RData")) 
   scores <- c("amps", "dels", "muts")
   discoversl_mutex <- list()
   for (s in scores) {
@@ -447,7 +447,7 @@ generate_discoverSL_mutex_scores <- function(gene1, genes, cancer) {
 # @example generate_survival_mutation_analysis("POLQ", genes, "BRCA")
 generate_survival_mutation_analysis <- function(gene1, genes, cancer) {
   print(paste0("generating survival mutation analysis for ", gene1, " in ", cancer))
-  clin <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/clinical_mutation_", cancer, ".RData"))
+  clin <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/clinical_mutation_", cancer, ".RData"))
   # Ugly hack required to get around an issue in survminer and surv_pvalue
   # See https://stackoverflow.com/questions/58991821/error-in-evalinp-data-env-object-database-not-found
   y1_var <- "days_to_death"
@@ -486,7 +486,7 @@ generate_survival_mutation_analysis <- function(gene1, genes, cancer) {
 # @example generate_survival_underexpressed_mRNA_analysis("POLQ", genes, "BRCA")
 generate_survival_underexpressed_mRNA_analysis <- function(gene1, genes, cancer) {
   print(paste0("generating survival mRNA underexpression analysis for ", gene1, " in ", cancer))
-  clin <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/clinical_underexpressed_mRNA_", cancer, ".RData"))
+  clin <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/clinical_underexpressed_mRNA_", cancer, ".RData"))
   y1_var <- "days_to_death"
   y2_var <- "vital_status"
   x_var <- "test_pair"
@@ -515,7 +515,7 @@ generate_survival_underexpressed_mRNA_analysis <- function(gene1, genes, cancer)
 
 generate_survival_analysis <- function(gene1, genes, cancer) {
   print(paste0("generating survival analysis for ", gene1, " in ", cancer))
-  survival_data <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/survival_", cancer, ".RData"))
+  survival_data <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/survival_", cancer, ".RData"))
   y1_var <- "days_to_death"
   y2_var <- "vital_status"
   x_var <- "test_pair + gender + years_to_birth + race"
@@ -561,7 +561,7 @@ generate_MUTEX_scores <- function(gene1, genes, cancer) {
   MUTEX <- numeric(length(genes)) + 2
   names(MUTEX) <- genes
   try({
-    ranked_groups <- readRDS(paste0("~/repos/msc-thesis-project/r/data/datasets/MUTEX_", cancer, ".RData"))
+    ranked_groups <- readRDS(paste0("~/repos/SBSL-modelling-and-analysis/r/data/datasets/MUTEX_", cancer, ".RData"))
     for (gene2 in genes) {
       if (!gene1 %in% rownames(ranked_groups) | !gene2 %in% rownames(ranked_groups)) next
       score1 <- ranked_groups[ranked_groups$gene1 == gene1 & ranked_groups$gene2 == gene2, ]$score
@@ -658,7 +658,7 @@ generate_all_scores_for_dataset <- function(dataset, cancer_list) {
     neg_samples <- dplyr::sample_n(neg_samples, n_samples)
     pairs <- dplyr::bind_rows(list(pos_samples, neg_samples))
   }
-  # pairs <- readRDS("~/repos/msc-thesis-project/r/data/isle_new_LAML.Rdata")[1:4]
+  # pairs <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/isle_new_LAML.Rdata")[1:4]
   gene1s <- unique(unlist(pairs$gene1))
   
   r <- foreach(g = 1:length(gene1s)) %dopar% {
@@ -690,4 +690,4 @@ generate_all_scores_for_dataset <- function(dataset, cancer_list) {
 # dataset <- "isle"
 # cancer_list <- c("LAML")
 # laml <- generate_all_scores_for_dataset(dataset, cancer_list)
-# saveRDS(laml, "~/repos/msc-thesis-project/r/data/isle_new_LAML_exp.Rdata")
+# saveRDS(laml, "~/repos/SBSL-modelling-and-analysis/r/data/isle_new_LAML_exp.Rdata")

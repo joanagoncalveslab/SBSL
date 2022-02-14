@@ -4,19 +4,19 @@ library(readxl)
 library(readr)
 library(dplyr)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 
 for (C in cancer_types){
   # download GISTIC scores
   # gisticDate <- getFirehoseAnalyzeDates(1)
-  # destdir <- "/home/colm/repos/msc-thesis-project/raw_data/firehose/"
+  # destdir <- "/home/colm/repos/SBSL-modelling-and-analysis/raw_data/firehose/"
   # dataset <- getFirehoseData(dataset=C, gistic2Date=gisticDate, clinic=FALSE, GISTIC = TRUE, destdir = destdir)
   
   # get the thresholded values
-  cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
+  cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-all_thresholded.by_genes.txt"), 
                          "\t", escape_double = FALSE, trim_ws = TRUE)
   labels <- dplyr::filter(all_labels, all_labels$cancer_type == C)
   unique_genes <- as.matrix(labels[c("gene1", "gene2")])
@@ -76,7 +76,7 @@ for (C in cancer_types){
   all_mutex[, 1] <- mutex_amp
   all_mutex[, 2] <- mutex_del
   
-  maf <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
+  maf <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", C, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   maf <- dplyr::select(maf, Hugo_Symbol, Variant_Classification, Tumor_Sample_Barcode)
   maf <- dplyr::filter(maf, Variant_Classification != "Silent")

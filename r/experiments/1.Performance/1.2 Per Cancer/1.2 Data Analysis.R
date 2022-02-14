@@ -1,4 +1,4 @@
-project_dir <- "~/repos/msc-thesis-project/"
+project_dir <- "~/repos/SBSL-modelling-and-analysis/"
 working_dir <- paste0(project_dir, "r/experiments/1.Performance/1.3 Dataset Cross Comparison/artifacts/images")
 setwd(working_dir)
 source(paste0(project_dir, "r/utils/train-model.R"))
@@ -64,11 +64,11 @@ for (cancer in c("BRCA", "LUAD", "OV", "COAD")) {
     COAD = "colorectal",
     LAML = "multiple_myeloma"
   )
-  crispr <- readRDS("~/repos/msc-thesis-project/r/data/datasets/avana.RData")
-  sample_info <- readRDS("~/repos/msc-thesis-project/r/data/datasets/sample_info.RData")
+  crispr <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/avana.RData")
+  sample_info <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/sample_info.RData")
   samples <- colnames(crispr)
   samples <- intersect(samples, sample_info$DepMap_ID[grepl(tissues[cancer], sample_info$lineage)])  
-  mutations <- readRDS("~/repos/msc-thesis-project/r/data/datasets/CCLE_mutations.RData")
+  mutations <- readRDS("~/repos/SBSL-modelling-and-analysis/r/data/datasets/CCLE_mutations.RData")
   mutations <- mutations[mutations$Variant_Classification != "Silent", ]
   mutations <- mutations[mutations$DepMap_ID %in% samples, ]
   mutation_counts <- table(mutations$Hugo_Symbol)
@@ -121,10 +121,10 @@ for (cancer in c("BRCA", "LUAD", "OV", "COAD")) {
     COAD = "colorectal",
     LAML = "multiple_myeloma"
   )
-  cnv <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-all_thresholded.by_genes.txt"), 
+  cnv <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-all_thresholded.by_genes.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   
-  maf <- read_delim(paste0("~/repos/msc-thesis-project/raw_data/firehose/20160128-", cancer, "-Mutations-AllSamples.txt"), 
+  maf <- read_delim(paste0("~/repos/SBSL-modelling-and-analysis/raw_data/firehose/20160128-", cancer, "-Mutations-AllSamples.txt"), 
                     "\t", escape_double = FALSE, trim_ws = TRUE)
   
   data.mut <- as.matrix(cnv[, -(1:3)]) != 0

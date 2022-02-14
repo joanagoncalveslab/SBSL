@@ -4,9 +4,9 @@ library(readxl)
 library(readr)
 library(dplyr)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/load-raw.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-raw.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 all_labels <- labels.load(labels_source)
 
@@ -14,7 +14,7 @@ for (C in cancer_types){
   print(paste("starting ", C, " analysis"))
   # download expression data
   # runDate <- getFirehoseRunningDates(1)
-  # destdir <- "/home/colm/repos/msc-thesis-project/raw_data/firehose"
+  # destdir <- "/home/colm/repos/SBSL-modelling-and-analysis/raw_data/firehose"
   # brcaData <- getFirehoseData(dataset=C, runDate=runDate, clinic=FALSE, RNASeq2GeneNorm = TRUE)
   
   # select genes of interest from labels

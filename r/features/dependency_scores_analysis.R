@@ -1,8 +1,8 @@
 library(readr)
 library(readxl)
 
-source("~/repos/msc-thesis-project/r/utils/load-labels.R")
-source("~/repos/msc-thesis-project/r/utils/global-vars.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/load-labels.R")
+source("~/repos/SBSL-modelling-and-analysis/r/utils/global-vars.R")
 
 d2_tissue_types <- c("BREAST", "LUNG", "KIDNEY", "OVARY", "LARGE_INTESTINE", "MULTIPLE_MYELOMA")
 avana_tissue_types <- c("BREAST", "LUNG", "KIDNEY", "OVARY", "COLORECTAL", "MULTIPLE_MYELOMA")
@@ -10,11 +10,11 @@ avana_tissue_types <- c("BREAST", "LUNG", "KIDNEY", "OVARY", "COLORECTAL", "MULT
 all_labels <- labels.load(labels_source)
 
 # load cell line info
-sample_info <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/avana/sample_info.csv", 
+sample_info <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/avana/sample_info.csv", 
                         col_types = cols_only(`CCLE Name` = col_guess(), 
                             DepMap_ID = col_guess(), lineage = col_guess()))
 # avana dataset
-avana <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/avana/Achilles_gene_effect.csv")
+avana <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/avana/Achilles_gene_effect.csv")
 avana_genes <- sapply(colnames(avana), function (x) strsplit(x, " \\(")[[1]][1])
 avana_samples <- avana$X1
 avana$X1 <- NULL
@@ -23,7 +23,7 @@ rownames(avana) <- avana_genes[-1]
 colnames(avana) <- avana_samples
 
 # d2 dependency scores
-D2 <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/combined_rnai/D2_combined_gene_dep_scores.csv")
+D2 <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/combined_rnai/D2_combined_gene_dep_scores.csv")
 d2_genes <- unname(sapply(D2$X1, function (x) strsplit(x, " \\(")[[1]][1]))
 d2_samples <- unname(sapply(colnames(D2), function (x) sample_info[sample_info$`CCLE Name` == x, ]$DepMap_ID))
 D2$X1 <- NULL
@@ -33,7 +33,7 @@ colnames(D2) <- d2_samples[-1]
 
 
 # ccle mutations
-ccle <- read_csv("~/repos/msc-thesis-project/raw_data/depmap/avana/CCLE_mutations.csv", 
+ccle <- read_csv("~/repos/SBSL-modelling-and-analysis/raw_data/depmap/avana/CCLE_mutations.csv", 
                            col_types = cols_only(DepMap_ID = col_guess(), 
                                                  Hugo_Symbol = col_guess(), Tumor_Sample_Barcode = col_guess(), 
                                                  Variant_Classification = col_guess()))
